@@ -1,0 +1,24 @@
+#指定本 yml 依从的 compose 哪个版本制定的
+version: "3.1"
+#定义服务
+services:
+  #定义一个服务
+  redis:
+    #指定镜像
+    image: daocloud.io/library/redis:5.0.7
+    #容器总是重新启动
+    restart: always
+    #容器名称
+    container_name: redis
+    #添加环境变量。指定时区
+    environment:
+      - TZ=Asia/Shanghai
+    #添加端口映射
+    ports:
+      - 6379:6379
+    #将主机当前目录的conf目录下的redis.conf挂载到容器里的/usr/local/redis.conf。
+    volumes:
+      - ./conf/redis.conf:/usr/local/redis.conf
+      - ./data/redis:/data/redis
+    #覆盖容器启动的默认命令。
+    command: ["redis-server", "/usr/local/redis.conf"]
