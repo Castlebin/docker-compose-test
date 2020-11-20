@@ -1,0 +1,82 @@
+#docker-compose.yml
+version: "3.1"
+services:
+  redis1:
+    image: daocloud.io/library/redis:5.0.7
+     #容器总是从新启动
+    restart: always
+    container_name: redis1
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 7001:7001
+      - 17001:17001
+    volumes:
+      - ./conf/redis1.conf:/usr/local/redis/redis.conf
+    command: ["redis-server","/usr/local/redis/redis.conf"]
+  redis2:
+    image: daocloud.io/library/redis:5.0.7
+     #容器总是从新启动
+    restart: always
+    container_name: redis2
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 7002:7002
+      - 17002:17002
+    volumes:
+      - ./conf/redis2.conf:/usr/local/redis/redis.conf
+    command: ["redis-server","/usr/local/redis/redis.conf"]
+  redis3:
+    image: daocloud.io/library/redis:5.0.7
+     #容器总是从新启动
+    restart: always
+    container_name: redis3
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 7003:7003
+      - 17003:17003
+    volumes:
+      - ./conf/redis3.conf:/usr/local/redis/redis.conf
+    command: ["redis-server","/usr/local/redis/redis.conf"]
+  redis4:
+    image: daocloud.io/library/redis:5.0.7
+     #容器总是从新启动
+    restart: always
+    container_name: redis4
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 7004:7004
+      - 17004:17004
+    volumes:
+      - ./conf/redis4.conf:/usr/local/redis/redis.conf
+    command: ["redis-server","/usr/local/redis/redis.conf"]
+  redis5:
+    image: daocloud.io/library/redis:5.0.7
+     #容器总是从新启动
+    restart: always
+    container_name: redis5
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 7005:7005
+      - 17005:17005
+    volumes:
+      - ./conf/redis5.conf:/usr/local/redis/redis.conf
+    command: ["redis-server","/usr/local/redis/redis.conf"]
+  redis6:
+    image: daocloud.io/library/redis:5.0.7
+     #容器总是从新启动
+    restart: always
+    container_name: redis6
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - 7006:7006
+      - 17006:17006
+    volumes:
+      - ./conf/redis6.conf:/usr/local/redis/redis.conf
+    command: ["redis-server","/usr/local/redis/redis.conf"]
+
