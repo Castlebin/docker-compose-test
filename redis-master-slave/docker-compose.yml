@@ -19,7 +19,6 @@ services:
     #将主机当前目录的conf目录下的redis.conf挂载到容器里的/usr/local/redis.conf。
     volumes:
       - ./conf/redis1.conf:/usr/local/redis.conf
-      - ./data1:/data
     #覆盖容器启动的默认命令。
     command: ["redis-server","/usr/local/redis.conf"]
   redis2:
@@ -38,7 +37,6 @@ services:
     #将主机当前目录的conf目录下的redis.conf挂载到容器里的/usr/local/redis.conf。
     volumes:
       - ./conf/redis2.conf:/usr/local/redis.conf
-      - ./data2:/data
     #配置链接，redis1容器别名master
     links:
       - redis1:master
@@ -60,7 +58,6 @@ services:
     #将主机当前目录的conf目录下的redis.conf挂载到容器里的/usr/local/redis.conf。
     volumes:
       - ./conf/redis3.conf:/usr/local/redis.conf
-      - ./data3:/data
     links:
       - redis1:master
     #覆盖容器启动的默认命令。
