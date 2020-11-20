@@ -1,0 +1,67 @@
+#指定本 yml 依从的 compose 哪个版本制定的
+version: '3.1'
+#定义服务
+services:
+#定义一个服务
+  redis1:
+    #指定镜像
+    image: daocloud.io/library/redis:5.0.7
+    #容器总是从新启动
+    restart: always
+    #容器名称
+    container_name: redis1
+    #添加环境变量。指定时区
+    environment:
+      - TZ=Asia/Shanghai
+    #添加端口映射
+    ports:
+      - 7001:6379
+    #将主机当前目录的conf目录下的redis.conf挂载到容器里的/usr/local/redis.conf。
+    volumes:
+      - ./conf/redis1.conf:/usr/local/redis.conf
+      - ./conf/sentinel1.conf:/data/sentinel.conf  #添加的内容
+    #覆盖容器启动的默认命令。
+    command: ["redis-server","/usr/local/redis.conf"]
+  redis2:
+    #指定镜像
+    image: daocloud.io/library/redis:5.0.7
+    #容器总是从新启动
+    restart: always
+    #容器名称
+    container_name: redis2
+    #添加环境变量。指定时区
+    environment:
+      - TZ=Asia/Shanghai
+    #添加端口映射
+    ports:
+      - 7002:6379
+    #将主机当前目录的conf目录下的redis.conf挂载到容器里的/usr/local/redis.conf。
+    volumes:
+      - ./conf/redis2.conf:/usr/local/redis.conf
+      - ./conf/sentinel2.conf:/data/sentinel.conf  #添加的内容
+    #配置链接，redis1容器别名master
+    links:
+      - redis1:master
+    #覆盖容器启动的默认命令。
+    command: ["redis-server","/usr/local/redis.conf"]
+  redis3:
+    #指定镜像
+    image: daocloud.io/library/redis:5.0.7
+    #容器总是从新启动
+    restart: always
+    #容器名称
+    container_name: redis3
+    #添加环境变量。指定时区
+    environment:
+      - TZ=Asia/Shanghai
+    #添加端口映射
+    ports:
+      - 7003:6379
+    #将主机当前目录的conf目录下的redis.conf挂载到容器里的/usr/local/redis.conf。
+    volumes:
+      - ./conf/redis3.conf:/usr/local/redis.conf
+      - ./conf/sentinel3.conf:/data/sentinel.conf  #添加的内容
+    links:
+      - redis1:master
+    #覆盖容器启动的默认命令。
+    command: ["redis-server","/usr/local/redis.conf"]
